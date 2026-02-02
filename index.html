@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+<!DOCTYPE html>
+<html>
 <head>
-    <title>Proj</title>
+    <title>PROJ</title>
     <style>
         body {
             background: #ffe6f0;
@@ -24,6 +26,7 @@
             color: #ff1e56;
             font-size: 36px;
             margin-bottom: 30px;
+            display: none; /* hidden initially */
         }
 
         .heart {
@@ -48,6 +51,8 @@
             cursor: pointer;
         }
 
+        #revealBtn { background: #ff69b4; color: white; }
+        #revealBtn:hover { background: #ff1e56; }
         #yesBtn { background: #ff1e56; color: white; }
         #yesBtn:hover { background: #d1003f; }
         #noBtn { background: #555; color: white; }
@@ -63,25 +68,37 @@
             width: 250px;
             border-radius: 20px;
             box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
-            margin: 15px auto 0 auto; /* center the image */
-            display: none; /* hidden initially */
+            margin: 15px auto 0 auto;
+            display: none;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
 
         .visible {
-            display: block; /* make it block when visible */
-            opacity: 1;     /* fade in */
+            display: block;
+            opacity: 1;
+        }
+
+        #buttons {
+            display: none; /* Yes/No buttons hidden at start */
         }
     </style>
 </head>
 <body>
     <div class="card">
+ 
         
-        <h1>Will you be my Valentine?</h1>
+        <!-- Hidden Valentine message -->
+        <h1 id="valentineText">Will you be my Valentine?</h1>
 
-        <button id="yesBtn">Yes 😘</button>
-        <button id="noBtn">No 🙄😡</button>
+        <!-- First Reveal Button -->
+        <button id="revealBtn">OPEN :></button>
+
+        <!-- Yes/No buttons (hidden until Reveal) -->
+        <div id="buttons">
+            <button id="yesBtn">Yes 😘</button>
+            <button id="noBtn">No 🙄😡</button>
+        </div>
 
         <!-- YES message + GIF -->
         <p id="yesMessage">NYAHAHAHAHA </p>
@@ -93,21 +110,30 @@
     </div>
 
     <script>
-        // Hide all messages/images on page load
         window.onload = function() {
+            // Hide everything initially
+            document.getElementById("valentineText").style.display = "none";
             document.getElementById("yesMessage").style.display = "none";
             document.getElementById("yesImage").classList.remove("visible");
             document.getElementById("noMessage").style.display = "none";
             document.getElementById("noImage").classList.remove("visible");
+            document.getElementById("buttons").style.display = "none";
 
+            // Button actions
+            document.getElementById("revealBtn").onclick = revealButtons;
             document.getElementById("yesBtn").onclick = yesAnswer;
             document.getElementById("noBtn").onclick = noAnswer;
+        }
+
+        function revealButtons() {
+            document.getElementById("valentineText").style.display = "block"; // show Valentine text
+            document.getElementById("buttons").style.display = "block"; // show Yes/No buttons
+            document.getElementById("revealBtn").style.display = "none"; // hide reveal button
         }
 
         function yesAnswer() {
             document.getElementById("yesMessage").style.display = "block";
             document.getElementById("yesImage").classList.add("visible");
-
             document.getElementById("noMessage").style.display = "none";
             document.getElementById("noImage").classList.remove("visible");
         }
@@ -115,7 +141,6 @@
         function noAnswer() {
             document.getElementById("noMessage").style.display = "block";
             document.getElementById("noImage").classList.add("visible");
-
             document.getElementById("yesMessage").style.display = "none";
             document.getElementById("yesImage").classList.remove("visible");
         }
