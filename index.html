@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proj</title>
+    <style>
+        body {
+            background: #ffe6f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 450px;
+            margin: 100px auto;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0px 12px 30px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            color: #ff1e56;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .heart {
+            font-size: 60px;
+            animation: pulse 1s infinite;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            font-size: 18px;
+            padding: 12px 30px;
+            margin: 15px 10px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        #yesBtn { background: #ff1e56; color: white; }
+        #yesBtn:hover { background: #d1003f; }
+        #noBtn { background: #555; color: white; }
+        #noBtn:hover { background: #333; }
+
+        p {
+            font-size: 22px;
+            color: #d1003f;
+            margin: 15px 0 5px 0;
+        }
+
+        img {
+            width: 250px;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+            margin: 15px auto 0 auto; /* center the image */
+            display: none; /* hidden initially */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .visible {
+            display: block; /* make it block when visible */
+            opacity: 1;     /* fade in */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        
+        <h1>Will you be my Valentine?</h1>
+
+        <button id="yesBtn">Yes 😘</button>
+        <button id="noBtn">No 🙄😡</button>
+
+        <!-- YES message + GIF -->
+        <p id="yesMessage">NYAHAHAHAHA </p>
+        <img id="yesImage" src="cute-dancing.gif" alt="Yes GIF">
+
+        <!-- NO message + image -->
+        <p id="noMessage">HMPPPPPPPPPPPPPHHHHHHHHHH </p>
+        <img id="noImage" src="a.jpg" alt="No Image">
+    </div>
+
+    <script>
+        // Hide all messages/images on page load
+        window.onload = function() {
+            document.getElementById("yesMessage").style.display = "none";
+            document.getElementById("yesImage").classList.remove("visible");
+            document.getElementById("noMessage").style.display = "none";
+            document.getElementById("noImage").classList.remove("visible");
+
+            document.getElementById("yesBtn").onclick = yesAnswer;
+            document.getElementById("noBtn").onclick = noAnswer;
+        }
+
+        function yesAnswer() {
+            document.getElementById("yesMessage").style.display = "block";
+            document.getElementById("yesImage").classList.add("visible");
+
+            document.getElementById("noMessage").style.display = "none";
+            document.getElementById("noImage").classList.remove("visible");
+        }
+
+        function noAnswer() {
+            document.getElementById("noMessage").style.display = "block";
+            document.getElementById("noImage").classList.add("visible");
+
+            document.getElementById("yesMessage").style.display = "none";
+            document.getElementById("yesImage").classList.remove("visible");
+        }
+    </script>
+</body>
+</html>
